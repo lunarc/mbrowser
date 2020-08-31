@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>LMOD Browser</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,10,10">
+  <layout class="QVBoxLayout" name="verticalLayout_8" stretch="0,0,0,0,10,10">
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
@@ -34,6 +34,82 @@
    </item>
    <item>
     <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Horizontal</enum>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout_3">
+     <item>
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>Selection preferences: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="prefer_none_check">
+       <property name="text">
+        <string>None</string>
+       </property>
+       <property name="checked">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="prefer_gcc_check">
+       <property name="text">
+        <string>GCC</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="prefer_ifort_check">
+       <property name="text">
+        <string>Intel Fortran</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QRadioButton" name="prefer_icc_check">
+       <property name="text">
+        <string>Intel C</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line_3">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="prefer_cuda_check">
+       <property name="text">
+        <string>CUDA</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="horizontalSpacer">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>40</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="Line" name="line_2">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>
@@ -84,14 +160,21 @@
        <item>
         <widget class="QLabel" name="label_4">
          <property name="text">
-          <string>Toolchains</string>
+          <string>Variants</string>
          </property>
         </widget>
        </item>
        <item>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QComboBox" name="alt_list"/>
+          <widget class="QListWidget" name="alt_list"/>
+         </item>
+         <item>
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Dependencies</string>
+           </property>
+          </widget>
          </item>
          <item>
           <widget class="QListWidget" name="parent_list"/>

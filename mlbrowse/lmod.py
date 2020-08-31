@@ -1,4 +1,5 @@
 #!/bin/env python
+"""Module for parsing and querying LMOD json-database"""
 
 import os
 import sys
@@ -9,6 +10,10 @@ import json
 # $LMOD_DIR/spider -o jsonSoftwarePage $MODULEPATH > modules.json
 
 class LmodDB(object):
+    """LmodDB class
+
+    Reads a LMOD json database and stores in Python dictionaries.
+     """
     def __init__(self, filename="modules.json"):
         self._filename = filename
         with open(self._filename, "r") as f:
@@ -33,12 +38,14 @@ class LmodDB(object):
 
 
     def find_versions(self, module):
+        """Find versions of specific module."""
         versions = []
         for version in self.module_version_dict[module].keys():
             versions.append(version)
         return versions
 
     def find_module_source(self, module, version):
+        """Find module source"""
         if module in self.module_version_dict:
             if version in self.module_version_dict[module]:
                 return self.module_version_dict[module][version]["path"]
@@ -46,6 +53,7 @@ class LmodDB(object):
         return ""
 
     def find_parents(self, module, version):
+        """Find module parents (dependencies)"""
         module_parents = []
         if module in self.module_version_dict:
             if version in self.module_version_dict[module]:
@@ -58,34 +66,38 @@ class LmodDB(object):
         return []
 
     def find_version_info(self, module):
+        """Find version information on specific module."""
         versions = []
         for version in self.module_dict[module]["versions"]:
             versions.append(version)
         return versions
 
     def find_modules(self, name=""):
+        """Find modules in tree. Use @name to filter modules."""
         module_names = []
 
         for module in self.modules:
             if name=="":
                 module_names.append(module["package"])
             else: 
-                if name in module["package"]:
+                if name == module["package"][0:len(name)]:
                     module_names.append(module["package"])
-                elif name.upper() in module["package"]:
+                elif name.upper() == module["package"][0:len(name)]:
                     module_names.append(module["package"])
-                elif name.lower() in module["package"]:
+                elif name.lower() == module["package"][0:len(name)]:
                     module_names.append(module["package"])
 
         return module_names
 
     def find_description(self, module):
+        """Find module descriptions."""
         try:
             return self.module_dict[module]["description"]
         except:
             return ""
 
     def find_default_version(self, module):
+        """Return default version of specific module"""
         try:
             return self.module_dict[module]["defaultVersionName"]
         except:

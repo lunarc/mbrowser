@@ -12,7 +12,7 @@ def print_error(msg):
 
 @Singleton
 class MlBrowseConfig(object):
-    """Launcher configuration"""
+    """LMOD Browser configuration"""
     def __init__(self, config_filename = ""):
 
         self._default_props()
