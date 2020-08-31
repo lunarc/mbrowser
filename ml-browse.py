@@ -2,7 +2,6 @@
 
 import os, sys, argparse
 
-from queue import Queue
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 # --- Version information
