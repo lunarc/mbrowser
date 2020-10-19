@@ -46,7 +46,12 @@ class LmodQueryWindow(QtWidgets.QWidget):
         self.prefer_icc = False
         self.prefer_cuda = False
 
+        if settings.LaunchSettings.create().args.select:
+            self.start_term_button.setVisible(False)
+            self.copy_cmds_button.setVisible(False)
+
         self.on_search_edit_textChanged("")
+        
 
     @QtCore.pyqtSlot(str)
     def on_search_edit_textChanged(self, search_string):
@@ -229,6 +234,16 @@ class LmodQueryWindow(QtWidgets.QWidget):
         """Copy selected modules to clipboard"""
         self.module_cmds_text.selectAll()
         self.module_cmds_text.copy()
+
+    @QtCore.pyqtSlot()
+    def on_select_modules_button_clicked(self):
+        """Copy selected modules to clipboard"""
+
+        print('#MODSTART#')
+        print(self.module_cmds_text.toPlainText())
+        
+        self.close()
+
 
 if __name__ == "__main__":
 

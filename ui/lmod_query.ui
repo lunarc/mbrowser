@@ -252,6 +252,13 @@
              </property>
             </widget>
            </item>
+           <item>
+            <widget class="QPushButton" name="select_modules_button">
+             <property name="text">
+              <string>Select</string>
+             </property>
+            </widget>
+           </item>
           </layout>
          </item>
         </layout>

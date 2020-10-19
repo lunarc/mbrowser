@@ -86,6 +86,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="LMOD Browser")
 
+    parser.add_argument("--select", dest="select", action="store_true", default=False,
+                        help="Selection mode")
+
     args = parser.parse_args()
 
     launchSettings = settings.LaunchSettings.create()
