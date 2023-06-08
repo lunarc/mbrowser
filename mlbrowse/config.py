@@ -20,8 +20,8 @@ class MlBrowseConfig(object):
         tool_path = settings.LaunchSettings.create().tool_path        
 
         self.config_file_alt1 = "/etc/mlbrowse.conf"
-        self.config_file_alt2 = "/sw/pkg/mlbrowse/etc/mlbrowse.conf"
-        self.config_file_alt3 = os.path.join(tool_path, "etc/mlbrowse.conf")
+        self.config_file_alt2 = "/sw/pkg/mbrowser/etc/mlbrowse.conf"
+        self.config_file_alt3 = os.path.join(tool_path, "../etc/mlbrowse.conf")
 
         self.config_filename = config_filename
 
