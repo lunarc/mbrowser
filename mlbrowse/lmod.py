@@ -9,6 +9,8 @@ import json
 # Generate modules.json with:
 # $LMOD_DIR/spider -o jsonSoftwarePage $MODULEPATH > modules.json
 
+import sys
+
 class LmodDB(object):
     """LmodDB class
 
@@ -16,6 +18,11 @@ class LmodDB(object):
      """
     def __init__(self, filename="modules.json"):
         self._filename = filename
+
+        if not os.path.exists(self._filename):
+            print(f"Could not load {self._filename}")
+            sys.exit(1)
+
         with open(self._filename, "r") as f:
             self.modules = json.load(f)
 
@@ -79,13 +86,20 @@ class LmodDB(object):
         for module in self.modules:
             if name=="":
                 module_names.append(module["package"])
-            else: 
-                if name == module["package"][0:len(name)]:
+            else:
+                if name in module["package"]:
                     module_names.append(module["package"])
-                elif name.upper() == module["package"][0:len(name)]:
+                elif name.upper() in module["package"].upper():
                     module_names.append(module["package"])
-                elif name.lower() == module["package"][0:len(name)]:
+                elif name.lower() in module["package"].lower():
                     module_names.append(module["package"])
+
+                #if name == module["package"][0:len(name)]:
+                #    module_names.append(module["package"])
+                #elif name.upper() == module["package"][0:len(name)]:
+                #    module_names.append(module["package"])
+                #elif name.lower() == module["package"][0:len(name)]:
+                #    module_names.append(module["package"])
 
         return module_names
 
