@@ -50,6 +50,8 @@ class LmodQueryWindow(QtWidgets.QWidget):
             self.start_term_button.setVisible(False)
             self.copy_cmds_button.setVisible(False)
 
+        self.module_stats_label.setText("%d total modules and %d versions." % (self.lmod.module_count, self.lmod.module_version_count))
+
         self.on_search_edit_textChanged("")
         
 
@@ -125,7 +127,7 @@ class LmodQueryWindow(QtWidgets.QWidget):
             self.default_version = self.lmod.find_default_version(self.current_module)
 
             self.module_help_text.clear()
-            self.module_help_text.insertPlainText(self.description)
+            self.module_help_text.insertPlainText(self.description.replace("\n", ""))
 
             #default_version = self.lmod.module_tree[self.current_module]["default_version"]
 

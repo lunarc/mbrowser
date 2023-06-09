@@ -13,7 +13,7 @@ This is free software, and you are welcome to redistribute it
 under certain conditions; see LICENSE for details.
 """
 mlbrowse_copyright_short = """LUNARC LMOD Browser - %s"""
-mlbrowse_version = "0.2.2"
+mlbrowse_version = "0.3.0"
 
 # --- Fix search path for tool
 

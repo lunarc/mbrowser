@@ -28,11 +28,17 @@ class LmodDB(object):
 
         self.module_dict = {}
         self.module_version_dict = {}
+        self.module_count = 0
+        self.module_version_count = 0
 
         for module in self.modules:
+            self.module_count += 1
             module_name = module["package"]
             self.module_dict[module_name] = module
             for version in module["versions"]:
+
+                self.module_version_count += 1
+
                 if "versionName" in version:
                     module_version = version["versionName"]
 
@@ -42,6 +48,9 @@ class LmodDB(object):
                         self.module_version_dict[module_name][module_version] = []
 
                     self.module_version_dict[module["package"]][module_version].append(version)
+        
+        print(self.module_count)
+        print(self.module_version_count)
 
 
     def find_versions(self, module):

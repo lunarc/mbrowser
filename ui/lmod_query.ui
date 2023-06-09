@@ -203,14 +203,27 @@
         <widget class="QTextEdit" name="module_help_text">
          <property name="font">
           <font>
-           <family>DejaVu Sans Mono</family>
+           <pointsize>10</pointsize>
           </font>
          </property>
          <property name="lineWrapMode">
-          <enum>QTextEdit::NoWrap</enum>
+          <enum>QTextEdit::WidgetWidth</enum>
          </property>
          <property name="readOnly">
           <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="module_stats_label">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>27</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
          </property>
         </widget>
        </item>
