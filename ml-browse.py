@@ -32,8 +32,9 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser(description="LMOD Browser")
 
-    parser.add_argument("--select", dest="select", action="store_true", default=False,
-                        help="Selection mode")
+    parser.add_argument("--select", dest="select", action="store_true", default=False, help="Selection mode")
+    parser.add_argument("--name-only", dest="name_only", action="store_true", default=False, help="Only return names in selection.")
+    parser.add_argument("--filter", dest="filter", action="store", default="", help="default filter applied.")
 
     args = parser.parse_args()
 
@@ -56,7 +57,5 @@ if __name__ == '__main__':
     form.show()
 
     # Start main application loop
-
-    #app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
 
     app.exec_()

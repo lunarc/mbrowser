@@ -37,6 +37,7 @@ class LmodQueryWindow(QtWidgets.QWidget):
         self.parent = parent
 
         self.lmod = lmod.LmodDB(self.config.modules_json_file)
+        self.terminal_command = self.config.terminal_command
 
         self.current_module = ""
         self.current_version = ""
@@ -50,10 +51,20 @@ class LmodQueryWindow(QtWidgets.QWidget):
             self.start_term_button.setVisible(False)
             self.copy_cmds_button.setVisible(False)
 
+        if settings.LaunchSettings.create().args.name_only:
+            self.name_only = settings.LaunchSettings.create().args.name_only
+
+
         self.module_stats_label.setText("%d total modules and %d versions." % (self.lmod.module_count, self.lmod.module_version_count))
 
-        self.on_search_edit_textChanged("")
+        self.filter = ""
+
+        if settings.LaunchSettings.create().args.filter:
+            self.filter = settings.LaunchSettings.create().args.filter
         
+        self.search_edit.setText(self.filter)
+        #self.on_search_edit_textChanged("")
+
 
     @QtCore.pyqtSlot(str)
     def on_search_edit_textChanged(self, search_string):
@@ -195,7 +206,10 @@ class LmodQueryWindow(QtWidgets.QWidget):
                                     self.alt_list.setCurrentRow(i)
                                     break
             else:
-                self.module_cmds_text.insertPlainText("module load %s/%s" % (self.current_module, self.current_version))
+                if self.name_only:
+                    self.module_cmds_text.insertPlainText("%s/%s" % (self.current_module, self.current_version))
+                else:
+                    self.module_cmds_text.insertPlainText("module load %s/%s" % (self.current_module, self.current_version))
 
 
 
@@ -212,9 +226,15 @@ class LmodQueryWindow(QtWidgets.QWidget):
 
             for parent in self.current_alternatives[idx]:
                 self.parent_list.addItem(parent)
-                self.module_cmds_text.insertPlainText("module load %s\n" % parent)
+                if self.name_only:
+                    self.module_cmds_text.insertPlainText("%s\n" % parent)
+                else:
+                    self.module_cmds_text.insertPlainText("module load %s\n" % parent)
 
-            self.module_cmds_text.insertPlainText("module load %s/%s\n" % (self.current_module, self.current_version))
+            if self.name_only:
+                self.module_cmds_text.insertPlainText("%s/%s\n" % (self.current_module, self.current_version))
+            else:
+                self.module_cmds_text.insertPlainText("module load %s/%s\n" % (self.current_module, self.current_version))
 
     @QtCore.pyqtSlot()
     def on_start_term_button_clicked(self):
@@ -226,10 +246,10 @@ class LmodQueryWindow(QtWidgets.QWidget):
         if len(cmd_list)>1:
             cmd_list.insert(0, "ml purge")
             cmd_row = ";".join(cmd_list)
-            print("%smate-terminal" % (cmd_row))
-            execute_with_output("%smate-terminal" % (cmd_row))
+            execute_with_output("%s%s" % (cmd_row, self.terminal_command))
         else:
-            execute_with_output("ml purge;%s;mate-terminal" % (cmds.strip()))
+            if cmds.strip()!="":
+                execute_with_output("ml purge;%s;%s" % (cmds.strip(), self.terminal_command))
 
     @QtCore.pyqtSlot()
     def on_copy_cmds_button_clicked(self):

@@ -45,7 +45,8 @@ class MlBrowseConfig(object):
 
     def _default_props(self):
         """Assign default properties"""
-        self.module_json_file = "/sw/pkg/rviz/share/modules.json"
+        self.modules_json_file = "/sw/pkg/rviz/share/modules.json"
+        self.terminal_command = "gnome-terminal"
 
     def print_config(self):
         """Print configuration"""
@@ -58,16 +59,17 @@ class MlBrowseConfig(object):
         print("")
         print("General settings")
         print("")
-        print("modules_json_file = %" % (self.module_json_file))
+        print("modules_json_file = %s" % (self.module_json_file))
+        print("terminal-command = %s" % (self.terminal_command))
 
         
-    def _config_get(self, config, section, option):
+    def _config_get(self, config, section, option, default=""):
         """Safe config retrieval"""
         
         if config.has_option(section, option):
             return config.get(section, option)
         else:
-            return ""
+            return default
 
     def _config_getboolean(self, config, section, option):
         """Safe config retrieval"""
@@ -92,7 +94,8 @@ class MlBrowseConfig(object):
         # Check for correct sections
 
         try:
-            self.modules_json_file = self._config_get(config, "general", "modules_json_file")
+            self.modules_json_file = self._config_get(config, "general", "modules_json_file", self.modules_json_file)
+            self.terminal_command = self._config_get(config, "general", "terminal_command", self.terminal_command)
         except configparser.Error as e:
             print_error(e)
             return False
