@@ -262,6 +262,7 @@ class LmodQueryWindow(QtWidgets.QWidget):
 
         print('#MODSTART#')
         print(self.module_cmds_text.toPlainText())
+        print()
         
         self.close()
 
