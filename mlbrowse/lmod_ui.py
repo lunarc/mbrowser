@@ -46,6 +46,8 @@ class LmodQueryWindow(QtWidgets.QWidget):
         self.prefer_ifort = False
         self.prefer_icc = False
         self.prefer_cuda = False
+        self.name_only = False
+        self.filter = ""
 
         if settings.LaunchSettings.create().args.select:
             self.start_term_button.setVisible(False)
@@ -54,10 +56,7 @@ class LmodQueryWindow(QtWidgets.QWidget):
         if settings.LaunchSettings.create().args.name_only:
             self.name_only = settings.LaunchSettings.create().args.name_only
 
-
         self.module_stats_label.setText("%d total modules and %d versions." % (self.lmod.module_count, self.lmod.module_version_count))
-
-        self.filter = ""
 
         if settings.LaunchSettings.create().args.filter:
             self.filter = settings.LaunchSettings.create().args.filter
