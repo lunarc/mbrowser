@@ -7,13 +7,13 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 # --- Version information
 
 mlbrowse_copyright = """LUNARC LMOD Browser - Version %s
-Copyright (C) 2017-2023 LUNARC, Lund University
+Copyright (C) 2017-2024 LUNARC, Lund University
 This program comes with ABSOLUTELY NO WARRANTY; for details see LICENSE.
 This is free software, and you are welcome to redistribute it
 under certain conditions; see LICENSE for details.
 """
 mlbrowse_copyright_short = """LUNARC LMOD Browser - %s"""
-mlbrowse_version = "0.3.0"
+mlbrowse_version = "0.3.1"
 
 # --- Fix search path for tool
 

@@ -183,27 +183,31 @@ class LmodQueryWindow(QtWidgets.QWidget):
                     short_form = short_form[:-1]
                     self.alt_list.addItem("%s" % (short_form))
 
-                if len(self.current_alternatives)==1:
+                if len(self.current_alternatives)>0:
                     self.alt_list.setCurrentRow(0)
-                else:
-                    if self.alt_list.count()<4:
-                        for i in range(self.alt_list.count()):
-                            if self.prefer_cuda:
-                                if self.alt_list.item(i).text().lower().find("cuda")!=-1:
-                                    self.alt_list.setCurrentRow(i)
-                                    break
-                            if self.prefer_gcc:
-                                if self.alt_list.item(i).text().lower().find("gcc")!=-1:
-                                    self.alt_list.setCurrentRow(i)
-                                    break
-                            if self.prefer_ifort:
-                                if self.alt_list.item(i).text().lower().find("ifort")!=-1:
-                                    self.alt_list.setCurrentRow(i)
-                                    break
-                            if self.prefer_icc:
-                                if self.alt_list.item(i).text().lower().find("icc")!=-1:
-                                    self.alt_list.setCurrentRow(i)
-                                    break
+
+                # if len(self.current_alternatives)==1:
+                #     self.alt_list.setCurrentRow(0)
+                # else:
+                #     if self.alt_list.count()<4:
+                #         for i in range(self.alt_list.count()):
+                #             if self.prefer_cuda:
+                #                 if self.alt_list.item(i).text().lower().find("cuda")!=-1:
+                #                     self.alt_list.setCurrentRow(i)
+                #                     break
+                #             if self.prefer_gcc:
+                #                 if self.alt_list.item(i).text().lower().find("gcc")!=-1:
+                #                     self.alt_list.setCurrentRow(i)
+                #                     break
+                #             if self.prefer_ifort:
+                #                 if self.alt_list.item(i).text().lower().find("ifort")!=-1:
+                #                     self.alt_list.setCurrentRow(i)
+                #                     break
+                #             if self.prefer_icc:
+                #                 if self.alt_list.item(i).text().lower().find("icc")!=-1:
+                #                     self.alt_list.setCurrentRow(i)
+                #                     break
+                
             else:
                 if self.name_only:
                     self.module_cmds_text.insertPlainText("%s/%s" % (self.current_module, self.current_version))
