@@ -2,8 +2,6 @@
 
 MBROWSE_DIR="$( cd "$(dirname "$0")" ; pwd -P )"
 
-export PYTHONPATH=$MBROWSE_DIR/../qtui
-export PATH=$MBROWSE_DIR/../qtui/bin:$PATH
 export FONTCONFIG_FILE=/etc/fonts/fonts.conf
 export FONTCONFIG_PATH=/etc/fonts/
 python $MBROWSE_DIR/ml-browse.py "$@"
